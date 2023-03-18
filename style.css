@@ -420,6 +420,7 @@ body {
     overflow-y: overlay;
     overflow-x: hidden;
     height: 378px;
+    scroll-behavior: smooth;
 }
 
 .right__chat-content::-webkit-scrollbar {

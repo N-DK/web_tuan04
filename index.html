@@ -256,22 +256,80 @@
                             </div>
                         </div>
                     </div>
-                    <form action="post" class="right__chat-input">
+                    <div class="right__chat-input">
                         <div class="chat__input-data">
-                            <input type="text" name="" id="" placeholder="Add message" required>
+                            <input type="text" name="" id="" placeholder="Add message" class="value_chat" required>
                             <i class='fas fa-smile'></i>
                         </div>
                         <div class="chat__input-send">
-                            <label for="submit">
+                            <label class="submit">
                                 <img src="./send.png" alt="">
                             </label>
                         </div>
-                        <input type="submit" value="" style="display: none" id="submit">
-                    </form>
+                    </d>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    const valueChat = document.querySelector('.value_chat');
+    const submit = document.querySelector('.submit')
+    const container = document.querySelector('.right__chat-content')
 
+    valueChat.addEventListener('keypress', (e)=>{
+        if(e.key === 'Enter'){
+            submit.onclick();
+        }
+    })
+
+    submit.onclick = ()=> {
+        if(valueChat.value.trim() !== '') {
+            let date = new Date();
+            var time = "";
+            var hour = "";
+            var minutes = "";
+            var session = 'AM'
+            const divAccount = document.createElement('div')
+            const divAccountAvatar = document.createElement('div')
+            const divAccountName = document.createElement('div')
+            const pName = document.createElement('p')
+            const pContentChat = document.createElement('p')
+            const spanTime = document.createElement('span')
+            const imgAvatar = document.createElement('img')
+            divAccount.className = "account__chat is-user"
+
+            if(date.getHours() > 12) {
+                hour = date.getHours() - 12;
+                session = 'PM';
+            } else {
+                hour = date.getHours();
+            }
+            
+            minutes = date.getMinutes();
+
+            time = hour + ':' + minutes + " " + session;
+
+            divAccountAvatar.className = "account__chat-avatar"
+            imgAvatar.src = "./Avatar 1322.png"
+            divAccountAvatar.appendChild(imgAvatar)
+
+            divAccountName.className = "account__chat-name"
+            pContentChat.className = "content__chat"
+            pContentChat.innerText = valueChat.value;
+            pName.innerText = "Benjamin"
+            spanTime.innerText = time
+            divAccountName.appendChild(pName)
+            divAccountName.appendChild(spanTime)
+            divAccountName.appendChild(pContentChat)
+
+            divAccount.appendChild(divAccountAvatar)
+            divAccount.appendChild(divAccountName)
+            
+            container.appendChild(divAccount);
+            container.scrollTo(0, container.scrollHeight);
+            valueChat.value = ""
+        }
+    }
+</script>
 </html>
